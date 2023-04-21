@@ -5,8 +5,7 @@ function Header() {
   let navigate = useNavigate();
 
   const gotoHome = () => {
-    let path = `/`; 
-    navigate(path);
+    navigate('/');
   }
 
   return (

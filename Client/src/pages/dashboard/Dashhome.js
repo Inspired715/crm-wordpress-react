@@ -4,6 +4,7 @@ import fpng from '../../assets/avatar/4.png'
 import gpng from '../../assets/avatar/7.png'
 import { useEffect, useState } from "react";
 import HistoryChart from "../../component/Historychart";
+import { useNavigate } from "react-router-dom";
 
 function Dashhome() {
     const user_info = JSON.parse(localStorage.getItem('gateway_user_info'));
@@ -58,6 +59,17 @@ function Dashhome() {
         return i + "th";
     }
 
+    let navigate = useNavigate();
+
+    const gotoPage = (path) => {
+        navigate('/dashboard/balance', {
+            state: {
+              status: 0,
+            }
+          }
+        );
+    }
+
     useEffect(() => {
         fetch('http://localhost:3001/get_home', { 
             method: 'post',
@@ -97,7 +109,7 @@ function Dashhome() {
                                 <p className="font-13-hel color-grey mt-3">Earned from {homeData?.s_date} - {homeData?.e_date}, {homeData?.year}</p>
                             </div>
                             <div className="card-btn mt-2 space-between">
-                                <button className="btn-yellow font-14">SEE BALANCE DETAILS</button>
+                                <button className="btn-yellow font-14" onClick={() => gotoPage()}>SEE BALANCE DETAILS</button>
                                 <button className="btn-transparent font-14">REQUEST CASH OUT</button>
                             </div>
                         </Col>
