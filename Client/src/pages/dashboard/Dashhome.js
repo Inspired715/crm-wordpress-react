@@ -139,10 +139,10 @@ function Dashhome() {
                             </div>                            
                         </div>  
                         <div className="p-0 user-list">
-                            {homeData?.ranking?.map((item, key) => {
-                                if(key > 0)
+                            {homeData?.ranking?.map((item, index) => {
+                                if(index && index > 0)
                                     return(
-                                        <div key={item.f_name} className="card-bg-black space-between base-line mt-2 p-10">
+                                        <div key={`${item.f_name}-${index}`} className="card-bg-black space-between base-line mt-2 p-10">
                                             <p className="font-13-hel m-0">{convertNumberToOrder(item.place)}</p>
                                             <img src={gpng} alt="gateway dashboard avatar" className="w-46" />
                                             <label className="btn-text">{item.f_name} {item.l_name}</label>
@@ -150,7 +150,7 @@ function Dashhome() {
                                         </div>
                                     )
                                 else
-                                    return(<></>)
+                                    return(<div key={index}></div>)
                             })}
                         </div>
                     </Row>
