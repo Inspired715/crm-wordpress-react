@@ -1,3 +1,6 @@
+const https = require("https");
+const fs = require("fs");
+
 const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
@@ -30,6 +33,10 @@ const connection = mysql.createConnection({
     user: 'sammy',
     password: 'password',
     database: 'CRM'
+    // host: 'localhost',
+    // user: 'gateway',
+    // password: 'gatewayagency',
+    // database: 'CRM'
 });
 connection.connect((err) => {
     if (err) throw err;
@@ -165,6 +172,12 @@ app.post("/updateAccount", (req, res) => {
 
 app.use(express.json());
 
-app.listen(3001, () => {
-    console.log(`Server is running on ${3001}`)
-})
+https.createServer(
+    {
+        key: fs.readFileSync("key.pem"),
+        cert: fs.readFileSync("cert.pem"),
+    },
+    app)
+  .listen(4000, ()=>{
+    console.log('server is runing at port 4000')
+});
