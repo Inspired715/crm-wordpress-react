@@ -11,7 +11,7 @@ function Welcome() {
   const email = location.state.email;
 
   const api_welcome = () => {
-    fetch('http://localhost:3001/welcome', { 
+    fetch('http://3.141.36.138:3001/welcome', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

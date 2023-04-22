@@ -16,7 +16,7 @@ function Login() {
   const api_login = () => {
     if(email === "" || password === "")
       return;
-    fetch('http://localhost:3001/login', { 
+    fetch('http://3.141.36.138:3001/login', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

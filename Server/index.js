@@ -151,6 +151,18 @@ app.post("/get_home", (req, res) => {
     res.send(JSON.stringify(mock));
 })
 
+app.post("/updateAccount", (req, res) => {
+    let email = req.body.email;
+    let pwd = req.body.password;
+    let avatar = req.body.avatar;
+    let phone = req.body.phone;
+
+    let sql = `update c_user set password='${pwd}', avatar='${avatar}', phone='${phone}' where email='${email}' and verify=1`;
+    connection.query(sql, (err, rows) => {
+        res.send(JSON.stringify({status:0, message:"success"}));
+    });
+})
+
 app.use(express.json());
 
 app.listen(3001, () => {

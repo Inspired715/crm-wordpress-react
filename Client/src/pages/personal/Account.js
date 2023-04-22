@@ -25,7 +25,7 @@ function Account() {
   const api_sign_up = () => {
     let result = validation();
     if(result){
-      fetch('http://localhost:3001/signup', { 
+      fetch('http://3.141.36.138:3001/signup', { 
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

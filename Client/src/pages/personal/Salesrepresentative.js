@@ -24,7 +24,7 @@ function Salesrepresentative() {
   const api_update_name = () => {
     if(first === "" || last === "")
       return;
-    fetch('http://localhost:3001/update', { 
+    fetch('http://3.141.36.138:3001/update', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

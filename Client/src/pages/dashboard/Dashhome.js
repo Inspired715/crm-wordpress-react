@@ -71,7 +71,7 @@ function Dashhome() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:3001/get_home', { 
+        fetch('http://3.141.36.138:3001/get_home', { 
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
