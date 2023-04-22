@@ -62,9 +62,6 @@ function Dashacct() {
         });
     }
 
-    const hi = (e) => {
-        console.log(e)
-    }
     return (
         <Layout title="your account information" sub="" code="00010">
             <div className="bg-yellow w-1080 h-865 p-0 p-account-form">
