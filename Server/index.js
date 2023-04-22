@@ -29,14 +29,14 @@ app.use(cors(corsOpts));
 
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'sammy',
-    password: 'password',
-    database: 'CRM'
     // host: 'localhost',
-    // user: 'gateway',
-    // password: 'gatewayagency',
+    // user: 'sammy',
+    // password: 'password',
     // database: 'CRM'
+    host: 'localhost',
+    user: 'gateway',
+    password: 'gatewayagency',
+    database: 'CRM'
 });
 connection.connect((err) => {
     if (err) throw err;

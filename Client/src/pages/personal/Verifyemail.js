@@ -21,7 +21,7 @@ function Verifyemail() {
   }
 
   const api_resend_code = () => {
-    fetch('http://3.141.36.138:3001/sendCode', { 
+    fetch('https://3.141.36.138:4000/sendCode', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -35,7 +35,7 @@ function Verifyemail() {
 
   const api_verify_email = () => {
     let verifyCode = num_1+num_2+num_3+num_4+num_5;
-    fetch('http://3.141.36.138:3001/verify', { 
+    fetch('https://3.141.36.138:4000/verify', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
