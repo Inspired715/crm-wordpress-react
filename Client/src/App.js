@@ -27,16 +27,18 @@ const App = () => {
   let email = JSON.parse(localStorage.getItem('gateway_user_info'))?.email;
   const { pathname } = useLocation()
   const navigate = useNavigate();
-
+  const notLogoutPages = [
+    '/','/login', '/account', '/verifyemail', '/sales', '/welcome'
+  ];
   useEffect(() => {
     if (!email){
-      if (pathname !== '/' && pathname !== '/login' && pathname !== '/account') {
+      if (notLogoutPages.indexOf(pathname) == -1) {
         navigate('/login');
       }
     }
   }, [pathname, email, navigate])
 
-  return (pathname !== '/' && pathname !== '/login' && !email && pathname !== '/account') ? (<></>) : (
+  return (notLogoutPages.indexOf(pathname) == -1) ? (<></>) : (
     <Routes>
       <Route exact path="/" element={<Landing />} />
       <Route exact path="/login" element={<Login />} />

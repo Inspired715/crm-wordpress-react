@@ -1,6 +1,3 @@
-const https = require("https");
-const fs = require("fs");
-
 const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
@@ -46,7 +43,7 @@ connection.connect((err) => {
 app.post("/login", (req, res) => {
     let email = req.body.email;
     let pwd = req.body.password;
-    let sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name IS NOT NULL and last_name IS NOT NULL`;
+    let sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name != '' and last_name != ''`;
     connection.query(sql, (err, rows) => {
         if (err) throw err;
 
@@ -65,10 +62,10 @@ app.post("/signup", (req, res) => {
     let email = req.body.email;
     let pwd = req.body.password;
     let token = Math.floor(10000 + Math.random() * 90000);
-    let sql = `select * from c_user where email='${email}' and verify=1 and first_name is not null and last_name is not null`;
+    let sql = `select * from c_user where email='${email}' and verify=1 and first_name != '' and last_name != ''`;
     connection.query(sql, (err, rows) => {
         if(rows.length === 0){
-            sql = `insert into c_user (email, password, token, verify, first_name, last_name) values('${email}', '${pwd}', '${token}', 0, null, null)`;
+            sql = `insert into c_user (email, password, token, verify, first_name, last_name) values('${email}', '${pwd}', '${token}', 0, '', '')`;
             connection.query(sql, (err, rows) => {
                 if (err) throw err;
                 var mailOptions = {
@@ -145,9 +142,9 @@ app.post("/update", (req, res) => {
 
 app.post("/welcome", (req, res) => {
     let email = req.body.email;
-    let sql = `delete from c_user where email='${email}' and (first_name is null OR last_name is null)`;
+    let sql = `delete from c_user where email='${email}' and (first_name == '' OR last_name == '')`;
     connection.query(sql, (err, rows) => {
-        sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name IS NOT NULL and last_name IS NOT NULL`;
+        sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name != '' and last_name != ''`;
         connection.query(sql, (err, rows) => {
             res.send(JSON.stringify({status:0, message:"success", user: rows[0]}));
         });
@@ -172,12 +169,6 @@ app.post("/updateAccount", (req, res) => {
 
 app.use(express.json());
 
-https.createServer(
-    {
-        key: fs.readFileSync("key.pem"),
-        cert: fs.readFileSync("cert.pem"),
-    },
-    app)
-  .listen(4000, ()=>{
-    console.log('server is runing at port 4000')
-});
+app.listen(4000, () => {
+    console.log(`Server is running on ${3001}`)
+})
