@@ -68,7 +68,7 @@ app.post("/signup", (req, res) => {
     let sql = `select * from c_user where email='${email}' and verify=1 and first_name is not null and last_name is not null`;
     connection.query(sql, (err, rows) => {
         if(rows.length === 0){
-            sql = `insert into c_user (email, password, token, verify) values('${email}', '${pwd}', '${token}', 0)`;
+            sql = `insert into c_user (email, password, token, verify, first_name, last_name) values('${email}', '${pwd}', '${token}', 0, null, null)`;
             connection.query(sql, (err, rows) => {
                 if (err) throw err;
                 var mailOptions = {
