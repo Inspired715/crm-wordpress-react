@@ -30,13 +30,13 @@ const App = () => {
 
   useEffect(() => {
     if (!email){
-      if (pathname !== '/' && pathname !== '/login') {
+      if (pathname !== '/' && pathname !== '/login' && pathname !== '/account') {
         navigate('/login');
       }
     }
   }, [pathname, email, navigate])
 
-  return (pathname !== '/' && pathname !== '/login' && !email) ? (<></>) : (
+  return (pathname !== '/' && pathname !== '/login' && !email && pathname !== '/account') ? (<></>) : (
     <Routes>
       <Route exact path="/" element={<Landing />} />
       <Route exact path="/login" element={<Login />} />
