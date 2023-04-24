@@ -38,7 +38,7 @@ const App = () => {
     }
   }, [pathname, email, navigate])
 
-  return (notLogoutPages.indexOf(pathname) == -1) ? (<></>) : (
+  return (!email && notLogoutPages.indexOf(pathname) == -1) ? (<></>) : (
     <Routes>
       <Route exact path="/" element={<Landing />} />
       <Route exact path="/login" element={<Login />} />
