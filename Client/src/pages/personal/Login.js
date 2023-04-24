@@ -35,6 +35,7 @@ function Login() {
             alert(res.message);
             break;
           case 2:
+            alert(res.message);
             navigate('/account');
             break;
           default:
