@@ -21,7 +21,7 @@ function Verifyemail() {
   }
 
   const api_resend_code = () => {
-    fetch('https://3.141.36.138:4000/sendCode', { 
+    fetch('https://api.gatewayagency.co/sendCode', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -35,7 +35,7 @@ function Verifyemail() {
 
   const api_verify_email = () => {
     let verifyCode = num_1+num_2+num_3+num_4+num_5;
-    fetch('https://3.141.36.138:4000/verify', { 
+    fetch('https://api.gatewayagency.co/verify', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

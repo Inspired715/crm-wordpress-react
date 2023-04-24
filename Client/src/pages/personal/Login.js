@@ -16,7 +16,7 @@ function Login() {
   const api_login = () => {
     if(email === "" || password === "")
       return;
-    fetch('https://3.141.36.138:4000/login', { 
+    fetch('https://api.gatewayagency.co/login', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

@@ -24,7 +24,7 @@ function Salesrepresentative() {
   const api_update_name = () => {
     if(first === "" || last === "")
       return;
-    fetch('https://3.141.36.138:4000/update', { 
+    fetch('https://api.gatewayagency.co/update', { 
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

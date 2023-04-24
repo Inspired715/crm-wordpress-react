@@ -44,7 +44,7 @@ function Dashacct() {
         if(validation())
             return;
         
-        fetch('https://3.141.36.138:4000/updateAccount', { 
+        fetch('https://api.gatewayagency.co/updateAccount', { 
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
