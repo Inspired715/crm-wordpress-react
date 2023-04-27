@@ -25,9 +25,8 @@ function Header() {
         <div className='w-[285px] py-[10px] px-[20px] col-span-1'>
           <img src={logo} alt="gateway landing logo" onClick={() => gotoPage('/home')}/>
         </div>
-        <div className="flex justify-center flex-col mx-[25px] gap-1 col-span-1 items-center sm:items-end pt-[20px]">
-          {visible ?
-          <>
+        {visible ?
+          <div className="flex justify-center flex-col mx-[25px] gap-1 col-span-1 items-center sm:items-end pt-[20px]">          
             <button className="rounded-full text-white h-[33px] w-[165px] bg-yellow" onClick={() => gotoPage('/login')}>
               SIGN IN
             </button>
@@ -36,10 +35,9 @@ function Header() {
             >
               CREATE ACCOUNT
             </label>
-          </>
+            </div>
           :
           <></>}
-        </div>
     </div>
     </>
   );
