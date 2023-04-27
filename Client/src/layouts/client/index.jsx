@@ -37,11 +37,11 @@ export default function ClientLayout() {
         <img alt="Gateway background" className="m-auto" src={bgHome}/>      
       </div>
       :
-      <div className="w-full absolute bg-yellow" style={{height:'calc(100vh - 117px)'}}>
+      <div className="w-full absolute bg-yellow" style={{height:'calc(100vh - 93px)'}}>
         <img alt="Gateway background" className="h-full" src={bgGeneral}/>      
       </div>
     }
-    <div className="relative" style={{height:'calc(100vh - 117px)'}}>
+    <div className="relative" style={{height:'calc(100vh - 93px)'}}>
       <div className="w-full h-full flex">
         <Routes>
           {getRoutes(routes)}
