@@ -1,6 +1,6 @@
 export default function Signup() {
   return (
-    <div className="w-90p p-[20px] h-90p sm:h-80p sm:p-[70px] rounded-[50px] m-auto bg-white" style={{maxWidth:'860px', overflow:'auto'}}>
+    <div className="w-90p p-[20px] h-91p sm:h-91p sm:p-[70px] rounded-[50px] m-auto bg-white" style={{maxWidth:'860px', overflow:'auto'}}>
       <div className="text-center mb-[10px] sm:mb-[50px]">
       <label className="font-bold text-[21px] sm:text-[30px]">
           CREATE YOUR GATEWAY ACCOUNT
