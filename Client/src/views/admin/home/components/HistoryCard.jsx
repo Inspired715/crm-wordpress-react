@@ -133,7 +133,7 @@ const HistoryCard = () => {
   ];
 
   return (
-    <Card className="rounded-[22px] p-[20px] bg-yellow" style={{height:'calc(100vh - 113px)'}}>
+    <Card className="rounded-[22px] p-[20px] bg-yellow" style={{height:'calc(100vh - 40px)'}}>
       <h4 className="mb-[14px] max-w-full text-xl font-bold text-black md:w-[64%] text-[30px] md:leading-[42px] lg:w-[46%] xl:w-[85%] 2xl:w-[75%] 3xl:w-[52%]">
         LEADERBOARD
       </h4>
@@ -147,7 +147,7 @@ const HistoryCard = () => {
           <img src={HistoryData[0].image} className="w-[90px] h-[90px] rounded-[100%]" alt="gatewayagency ranking first avatar"/>
         </div>
       </div>
-      <div style={{height:'calc(100vh - 390px)', overflow:"auto"}}>
+      <div style={{height:'calc(100vh - 315px)', overflow:"auto"}}>
         {HistoryData.map((data, index) => (
           <div className="py-[5px]" key={index}>
             <div className="flex h-full w-full items-start justify-between bg-black rounded-[7px] px-[15px] py-[2px] items-center">
