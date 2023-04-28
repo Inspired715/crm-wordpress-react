@@ -1,0 +1,30 @@
+.tableWrapper {
+    border-spacing: 0;
+    width: 100%;
+    background-color: #D4B65E;
+}
+tr:nth-child(2n) td {
+  background-color: #dbc78d;
+}
+
+th {
+  padding: 15px;
+}
+
+td {
+  padding: 5px 10px;
+}
+
+.arrow{
+  border-radius: 50%;
+  background-color: #b5973f;
+  width: 33px;
+  color: white;
+  padding: 5px;
+}
+
+@media (max-width: 540px) {
+  .table-container{
+    overflow-y: auto;
+  }
+}

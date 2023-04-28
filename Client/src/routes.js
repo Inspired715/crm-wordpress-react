@@ -6,6 +6,9 @@ import Sales from "views/admin/sales";
 import Resource from "views/admin/resource";
 import Account from "views/admin/account";
 import Balance from "views/admin/balance";
+import Services from "views/admin/services";
+import ServiceInfo from "views/admin/serviceinfo";
+import Users from "views/admin/users";
 
 import Home from "views/client/home";
 import Login from "views/client/login";
@@ -20,6 +23,9 @@ import {
   MdBarChart,
   MdPerson,
   MdLock,
+  MdDesignServices,
+  MdCleaningServices,
+  MdOutlineVerifiedUser
 } from "react-icons/md";
 
 const routes = [
@@ -63,6 +69,30 @@ const routes = [
     path: "balance",
     icon: <MdLock className="h-6 w-6" />, 
     component: <Balance />,
+  },
+  {
+    name: "Services",
+    brad: "Services",
+    layout: "/admin",
+    path: "services",
+    icon: <MdDesignServices className="h-6 w-6" />, 
+    component: <Services />,
+  },
+  {
+    name: "ServiceInfo",
+    brad: "Services Information",
+    layout: "/admin",
+    path: "serviceinfo",
+    icon: <MdCleaningServices className="h-6 w-6" />, 
+    component: <ServiceInfo />,
+  },
+  {
+    name: "Users",
+    brad: "Users",
+    layout: "/admin",
+    path: "users",
+    icon: <MdOutlineVerifiedUser className="h-6 w-6" />, 
+    component: <Users />,
   },
   {
     name: "Home",

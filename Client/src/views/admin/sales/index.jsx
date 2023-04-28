@@ -2,23 +2,23 @@ import SalesItem from "./components/SalesItem";
 
 const Sales = () => {
   return (
-    <>
-      <div className="mt-3 h-full">
+    <div className="overflow-auto h-full">
+      <div className="mt-3">
         <SalesItem />
       </div>
-      <div className="mt-3 h-full">
+      <div className="mt-3">
         <SalesItem />
       </div>
-      <div className="mt-3 h-full">
+      <div className="mt-3">
         <SalesItem />
       </div>
-      <div className="mt-3 h-full">
+      <div className="mt-3">
         <SalesItem />
       </div>
-      <div className="mt-3 h-full">
+      <div className="mt-3">
         <SalesItem />
       </div>
-    </>
+    </div>
   );
 };
 

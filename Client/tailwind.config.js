@@ -108,6 +108,7 @@ module.exports = {
       height:{
         "80p": "80%",
         "90p": "90%",
+        "force-full": 'calc(100vh - 85px)'
       }
     },
     fontFamily: {
@@ -133,6 +134,8 @@ module.exports = {
     },
     colors: () => ({
       white: "#ffffff",
+      red: 'red',
+      blue: 'blue',
       black: "#000000",
       transparent: "transparent",
       grey: "#EFEFEF",

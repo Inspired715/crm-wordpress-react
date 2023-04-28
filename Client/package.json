@@ -2,9 +2,10 @@
   "name": "horizon-ui-tailwind-react",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {    
+  "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@heroicons/react": "^1.0.1",
     "apexcharts": "3.35.5",
     "framer-motion": "^7.10.2",
     "highcharts": "^10.3.3",
