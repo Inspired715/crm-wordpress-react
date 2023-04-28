@@ -79,7 +79,7 @@ const routes = [
     component: <Services />,
   },
   {
-    name: "ServiceInfo",
+    name: "Service Info",
     brad: "Services Information",
     layout: "/admin",
     path: "serviceinfo",
