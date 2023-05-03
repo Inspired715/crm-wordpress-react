@@ -61,7 +61,7 @@ app.post("/insertService",  validateToken, (req, res) => {
 })
 
 app.post("/getServiceList",  validateToken, (req, res) => {
-    let sql = `select s.*, u.email, k.name as service from c_services s left join c_user u on s.user_id=u.id left join c_service_kind k on s.kind=k.id`;
+    let sql = `select s.*, u.email, k.name as service from c_services s left join c_user u on s.user_id=u.id left join c_service_kind k on s.kind=k.id order by s.id desc`;
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else
@@ -106,7 +106,7 @@ app.post("/getSalesList",  validateToken, (req, res) => {
                 left join c_user u on s.user_id=u.id 
                 left join c_services cs on s.service_id=cs.id 
                 left join c_service_kind ck on cs.kind=ck.id
-                where s.paid=1`;
+                where s.paid=1 order by s.created_at`;
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else{
@@ -159,17 +159,27 @@ app.post("/getLeaderBoard",  validateToken, (req, res) => {
 })
 
 app.post("/getChartData",  validateToken, (req, res) => {
-    let sql = `set @row_num=0;
-                select a.*, (@row_num := @row_num+1) as ranking, concat(u.first_name, ' ', u.last_name) as name, u.avatar 
-                from (select sum(cs.price) as price, s.user_id 
-                from c_sales s left join c_services cs on s.service_id=cs.id 
-                where s.paid=1 GROUP BY s.user_id ORDER BY price desc)a 
-                left join c_user u on a.user_id=u.id`;
+    let curr = new Date;
+    let firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
+    let lastday = new Date(curr.setDate(curr.getDate() - curr.getDay()+6));
+    firstday = firstday.toISOString().slice(0, 10);
+    lastday = lastday.toISOString().slice(0, 10);
+    
+    let sql = `select a.selected_date as dates, IFNULL(b.price,0) AS price from (
+        select * from (select adddate('1970-01-01',t4*10000 + t3*1000 + t2*100 + t1*10 + t0) selected_date from
+        (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+        (select 0 t1 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+        (select 0 t2 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+        (select 0 t3 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+        (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v 
+        where selected_date between '${firstday}' and '${lastday}') a 
+        left join (select sum(cs.price) as price, s.created_at from c_sales s left join c_services cs on s.service_id=cs.id where s.paid=1 and  s.created_at >= '${firstday}' and s.created_at <= '${lastday}' GROUP BY s.created_at)b 
+        on a.selected_date=b.created_at`;
 
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else
-        res.send(JSON.stringify({status:0, raking: rows[1]}));
+        res.send(JSON.stringify({status:0, charts: rows}));
     });
 })
 
