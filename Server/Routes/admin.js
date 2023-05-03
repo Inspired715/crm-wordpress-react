@@ -174,7 +174,7 @@ app.post("/getChartData",  validateToken, (req, res) => {
         (select 0 t4 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v 
         where selected_date between '${firstday}' and '${lastday}') a 
         left join (select sum(cs.price) as price, s.created_at from c_sales s left join c_services cs on s.service_id=cs.id where s.paid=1 and  s.created_at >= '${firstday}' and s.created_at <= '${lastday}' GROUP BY s.created_at)b 
-        on a.selected_date=b.created_at`;
+        on a.selected_date=b.created_at order by a.selected_date`;
 
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));

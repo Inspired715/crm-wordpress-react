@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post("/login", (req, res) => {
-    console.log("here");
     let email = req.body.email;
     let pwd = req.body.password;
     let sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name != '' and last_name != ''`;

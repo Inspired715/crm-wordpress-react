@@ -46,7 +46,7 @@ const TotalSpent = () => {
           colors: ['#000000'],
           stroke: { width: 3, curve: 'smooth' },
           xaxis: {
-              categories: data?.map(data => data.dates),
+            categories: data?.map(data => data.dates),
           }
         }}
         type="line" width="100%"/>
