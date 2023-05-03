@@ -1,42 +1,30 @@
 import Table from "components/table";
 import buy from "assets/img/layout/buy.png";
 import book from "assets/img/layout/book.png";
+import cogoToast from '@successtar/cogo-toast';
+import axios from "axios";
+import api_url from "constant";
+import { useEffect, useState } from "react";
 
 export default function Services() {
+const {token, email, phone, name} = JSON.parse(localStorage.getItem('gatewayagency'));
+const [data, setData] = useState([]);
 
-const eventTableData = [
-  {
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  },{
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  },{
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  },{
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  },{
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  },{
-    created_at: 'January 1, 2023',
-    service: 'Social Media Management - Instagram Management',
-    ser_name:'@sarahschwartz',
-    commission: "$1000.00"
-  }
-];
+useEffect(() => {
+  const account = { 
+    token: token
+  };
+  
+  axios.post(`${api_url}/getServiceList`, account)
+  .then(response => {
+    if(response.data.status === 0){
+      setData(response.data.service);
+    }
+    else{
+      cogoToast.error(response.data.message);
+    }        
+  });
+}, [token]);
 
 const columns = [
     {
@@ -45,23 +33,26 @@ const columns = [
       columns: [
         {
           Header: "Date",
-          accessor: "created_at"
+          accessor: "created_at",
+          Cell:(row) =>{
+            return <div>{row.row.original.created_at.slice(0, 10)}</div>
+          }
         },
         {
           Header: "Services",
           accessor: "service",
           Cell:(row) => {
             return (
-              <div>{row.row.original.service}<br/>{row.row.original.ser_name}</div>
+              <div>{row.row.original.service}-{row.row.original.title}<br/>{row.row.original.email}</div>
             )
           }
         },
         {
           Header: "Commission",
-          accessor: "commission",
+          accessor: "price",
           Cell:(row) => {
             return(
-              <div className="text-center">{row.row.original.commission}</div>
+              <div className="text-center">${parseFloat(row.row.original.price).toFixed(2)}</div>
             )
           }
         },
@@ -87,21 +78,21 @@ const columns = [
           <div className="bg-black rounded-[20px] p-5 grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-5 text-white">
             <div className="flex justify-center flex-col col-span-3">
                 <label className="text-[12px] text-grey">CLIENT'S NAME</label>
-                <label className="">BRADO'BRIEN</label> 
+                <label className="">{name}</label> 
             </div>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-2 col-span-2">
                 <div className="flex justify-center flex-col col-span-1">
                     <label className="text-[12px] text-grey">EMAIL</label>
-                    <label  className="text-[10px] text-grey">bradobren@gmail.com</label> 
+                    <label  className="text-[10px] text-grey">{email}</label> 
                 </div>
                 <div className="flex justify-center flex-col col-span-1">
                     <label className="text-[12px] text-grey">PHONE NUMBER</label>
-                    <label  className="text-[10px] text-grey">+1 (123) 456-7890</label> 
+                    <label  className="text-[10px] text-grey">{phone}</label> 
                 </div>
             </div>
           </div>
           <div>
-            <Table columns={columns} data={eventTableData} />
+            <Table columns={columns} data={data} />
           </div>
         </div>
       </div>

@@ -1,106 +1,30 @@
 import Table from "components/table";
+import cogoToast from '@successtar/cogo-toast';
+import axios from "axios";
+import api_url from "constant";
+import { useEffect, useState } from "react";
+import default_avatar from "assets/img/avatars/avatar.png"
 
 export default function Users() {
+  const {token, email} = JSON.parse(localStorage.getItem('gatewayagency'));
+  const [data, setData] = useState([]);
 
-  const eventTableData = [
-    {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '2',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '2',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '2',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    }, {
-      created_at: 'January 1, 2023',
-      name: 'Jacob Dane',
-      email: 'jcobdane@service.com',
-      phone: "+1 213 262 0113",
-      status: '1',
-    },
-  ];
+  useEffect(() => {  
+    const account = { 
+      email: email,
+      token: token
+    };
+    
+    axios.post(`${api_url}/getUserList`, account)
+    .then(response => {
+      if(response.data.status === 0){
+        setData(response.data.users);
+      }
+      else{
+        cogoToast.error(response.data.message);
+      }        
+    });
+  }, [email, token]);
 
   const columns = [
     {
@@ -115,8 +39,22 @@ export default function Users() {
             )
           }
         }, {
+          Header: "Avatar",
+          accessor: "avatar",
+          Cell:(row) => {
+            let avatar = row.row.original.avatar?row.row.original.avatar:default_avatar;
+            return (
+              <img src={avatar} alt="gateway agency avatar" className="rounded-full w-[45px] h-[45px] m-auto"/>
+            )
+          }
+        }, {
           Header: "Date",
-          accessor: "created_at"
+          accessor: "created_at",
+          Cell:(row) => {
+            return(
+              row.row.original.created_at?row.row.original.created_at.slice(0, 10):'2000-01-01'
+            )
+          }
         }, {
           Header: "NAME",
           accessor: "name"
@@ -126,17 +64,7 @@ export default function Users() {
         }, {
           Header: "PHONE",
           accessor: "phone"
-        },
-        {
-          Header: "STATUS",
-          Cell: (row) => {
-            return row.row.original.status === '1' ? (
-              <label className="text-blue">Active</label>
-            ) : (
-              <label className="text-red">Inactive</label>
-            )
-          }
-        },
+        }
       ],
     },
   ];
@@ -144,29 +72,16 @@ export default function Users() {
   return (
     <div className="h-full overflow-auto">
       <div className="flex w-full flex-col rounded-[22px] bg-cover px-[20px] py-[20px] bg-yellow">
-        <div className="w-full">
-          <div className="bg-black rounded-[20px] p-5 grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-5 text-white">
-            <div className="flex justify-center flex-col col-span-3">
-              <label className="text-[12px] text-grey">CLIENT'S NAME</label>
-              <label className="">BRADO'BRIEN</label>
-            </div>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-2 col-span-2">
-              <div className="flex justify-center flex-col col-span-1">
-                <label className="text-[12px] text-grey">EMAIL</label>
-                <label className="text-[10px] text-grey">bradobren@gmail.com</label>
-              </div>
-              <div className="flex justify-center flex-col col-span-1">
-                <label className="text-[12px] text-grey">PHONE NUMBER</label>
-                <label className="text-[10px] text-grey">+1 (123) 456-7890</label>
-              </div>
-            </div>
-          </div>
-          <div>
-            <Table columns={columns} data={eventTableData} />
-          </div>
+        <div className="w-full  text-right">
+          <button className="text-black linear rounded-[30px] bg-transparent px-4 text-center text-[11px] h-[45px] w-[120px]" style={{ border
+          :`1px solid black`}}>
+            SEND EMAIL
+          </button>
+        </div>
+        <div>
+          <Table columns={columns} data={data} />
         </div>
       </div>
     </div>
-
   );
 }

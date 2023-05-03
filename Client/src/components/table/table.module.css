@@ -9,10 +9,12 @@ tr:nth-child(2n) td {
 
 th {
   padding: 15px;
+  border-bottom: 1px solid black;
 }
 
 td {
   padding: 5px 10px;
+  text-align: center;
 }
 
 .arrow{

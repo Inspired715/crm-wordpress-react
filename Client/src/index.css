@@ -30,13 +30,3 @@
 		font-family: 'FontSpring Regular Bold' !important;
 	}
 }
-
-.force-transparent svg rect {
-	fill: black !important;
-}
-
-.force-transparent svg {
-	border-radius: 22px;
-	background-color: black !important;
-	padding: 15px;
-}
