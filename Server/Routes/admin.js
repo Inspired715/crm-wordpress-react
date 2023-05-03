@@ -52,7 +52,9 @@ app.post("/insertService",  validateToken, (req, res) => {
     let price = req.body.price;
     let today = new Date();
     let date = today.toISOString().split('T')[0];
+
     let sql = `insert into c_services (kind, user_id, price, description, title, created_at) values(${kind}, ${user_id}, ${price}, '${description}', '${title}', '${date}')`;
+    
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else

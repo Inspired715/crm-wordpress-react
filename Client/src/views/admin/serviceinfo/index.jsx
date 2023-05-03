@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import cogoToast from '@successtar/cogo-toast';
 import axios from "axios";
 import api_url from "constant";
+import {encode as base64_encode} from 'base-64';
 
 const ServiceInfo = () => {
   const {token, email, name, phone, user_id} = JSON.parse(localStorage.getItem('gatewayagency'));
@@ -28,15 +29,15 @@ const ServiceInfo = () => {
   }, [token]);
 
   const handleRegisterService = () => {
-    if(serviceTitle === '' || serviceDescription === '')
+    if(serviceTitle === '' || serviceDescription === '' || parseFloat(servicePrice)=== 0)
       return;
     
     const account = { 
       token: token,
       user_id:user_id,
       kind: kindId,
-      title: serviceTitle,
-      description: serviceDescription,
+      title: base64_encode(serviceTitle),
+      description: base64_encode(serviceDescription),
       price:servicePrice
     };
     
@@ -86,7 +87,7 @@ const ServiceInfo = () => {
               <h1>Service</h1>
               <div className="flex justify-between">
                 <input className="rounded-[10px] text-white h-[45px] mt-3 w-[40%] px-[5px] bg-black" placeholder="Title" onChange={(e) => setServiceTitle(e.target.value)}/>
-                <input className="rounded-[10px] text-white h-[45px] mt-3 w-[40%] px-[5px] bg-black" placeholder="Price" onChange={(e) => setServicePrice(e.target.value)}/>
+                <input className="rounded-[10px] text-white h-[45px] mt-3 w-[40%] px-[5px] bg-black" type="number" placeholder="Price" onChange={(e) => setServicePrice(e.target.value)}/>
               </div>
               <textarea rows={5} className="mt-3 w-full p-3 font-hel bg-black text-white" onChange={(e) => setServiceDescription(e.target.value)}></textarea>
             </div>

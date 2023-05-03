@@ -5,6 +5,7 @@ import cogoToast from '@successtar/cogo-toast';
 import axios from "axios";
 import api_url from "constant";
 import { useEffect, useState } from "react";
+import {decode as base64_decode} from 'base-64';
 
 export default function Services() {
 const {token, email, phone, name} = JSON.parse(localStorage.getItem('gatewayagency'));
@@ -43,7 +44,7 @@ const columns = [
           accessor: "service",
           Cell:(row) => {
             return (
-              <div>{row.row.original.service}-{row.row.original.title}<br/>{row.row.original.email}</div>
+              <div>{row.row.original.service}-{base64_decode(row.row.original.title)}<br/>{row.row.original.email}</div>
             )
           }
         },
