@@ -1,5 +1,6 @@
+import {decode as base64_decode} from 'base-64';
 const SalesItem = ({data}) => {
-  
+
   return (
     <div className="flex w-full flex-col rounded-[22px] p-5 bg-yellow">
       <div className="bg-black rounded-[20px] p-5 grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-5 text-white">
@@ -45,7 +46,7 @@ const SalesItem = ({data}) => {
                       {item.created_at.slice(0, 10)}
                     </td>
                     <td className="text-[12px] border-b border-black pt-[14px] pb-[20px]">
-                      {item.service}<br/>{item.email}
+                      {item.s_name}-{base64_decode(item.title)}<br/>{item.email}
                     </td>
                     <td className="text-[12px] text-center border-b border-black pt-[14px] pb-[20px]">
                       ${parseFloat(item.price).toFixed(2)}

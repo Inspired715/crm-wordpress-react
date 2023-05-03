@@ -104,7 +104,7 @@ app.post("/updateAccount", validateToken, (req, res) => {
 
 app.post("/getSalesList",  validateToken, (req, res) => {
     let sql = `select u.id,s.created_at, concat(u.first_name, ' ', u.last_name) as name, 
-                u.email, u.phone, concat(ck.name, '-', cs.title) as service, cs.price from c_sales s 
+                u.email, u.phone, ck.name as s_name, cs.title, cs.price from c_sales s 
                 left join c_user u on s.user_id=u.id 
                 left join c_services cs on s.service_id=cs.id 
                 left join c_service_kind ck on cs.kind=ck.id
