@@ -162,9 +162,15 @@ app.post("/getChartData",  validateToken, (req, res) => {
     let curr = new Date;
     let firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
     let lastday = new Date(curr.setDate(curr.getDate() - curr.getDay()+6));
+    
+    if(req.body.type === 1){
+        firstday = new Date(curr.getFullYear(), curr.getMonth(), 1);
+        lastday = new Date(curr.getFullYear(), curr.getMonth() + 1, 0);       
+    }
+    
     firstday = firstday.toISOString().slice(0, 10);
     lastday = lastday.toISOString().slice(0, 10);
-    
+
     let sql = `select a.selected_date as dates, IFNULL(b.price,0) AS price from (
         select * from (select adddate('1970-01-01',t4*10000 + t3*1000 + t2*100 + t1*10 + t0) selected_date from
         (select 0 t0 union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,

@@ -8,25 +8,27 @@ import api_url from "constant";
 const TotalSpent = () => {
   const {token, email} = JSON.parse(localStorage.getItem('gatewayagency'));
   const [data, setData] = useState([]);
-
-  useEffect(() => {
+  
+  async function handleGetChartData(type){
     const account = { 
       email: email,
-      token: token
+      token: token,
+      type:type
     };
-    async function fetchData(){
-      await axios.post(`${api_url}/admin/getChartData`, account)
-      .then(response => {
-        if(response.data.status === 0){
-          setData(response.data.charts);
-        }
-        else{
-          cogoToast.error(response.data.message);
-        }        
-      });
-    }
-    
-    fetchData();
+
+    await axios.post(`${api_url}/admin/getChartData`, account)
+    .then(response => {
+      if(response.data.status === 0){
+        setData(response.data.charts);
+      }
+      else{
+        cogoToast.error(response.data.message);
+      }        
+    });
+  }
+
+  useEffect(() => {
+    handleGetChartData(0);
   // eslint-disable-next-line
   }, [email, token]);
 
@@ -35,6 +37,14 @@ const TotalSpent = () => {
       <h4 className="mb-[10px] max-w-full text-xl font-bold text-black md:w-[64%] text-[30px] text-left md:leading-[42px] lg:w-[46%] xl:w-[85%] 2xl:w-[75%] 3xl:w-[52%]">
         HISOTRY
       </h4>
+      <div className="text-left">
+        <label className="bg-transparent text-black px-[10px] py-[5px] mx-[15px] rounded-[5px] font-hel" style={{border:'1px solid black',cursor:'grabbing'}}
+          onClick={() => handleGetChartData(0)}
+        >Week</label>
+        <label className="bg-transparent text-black px-[10px] py-[5px] mx-[15px] rounded-[5px] font-hel" style={{border:'1px solid black',cursor:'grabbing'}}
+          onClick={() => handleGetChartData(1)}
+        >Month</label>
+      </div>
       <Chart 
         series={[
           {
