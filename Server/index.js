@@ -39,6 +39,7 @@ connection.connect((err) => {
 });
 
 app.post("/login", (req, res) => {
+    console.log("here");
     let email = req.body.email;
     let pwd = req.body.password;
     let sql = `SELECT * from c_user where email='${email}' and verify=1 and first_name != '' and last_name != ''`;
@@ -161,6 +162,7 @@ app.post("/welcome", (req, res) => {
 })
 
 var validateToken = function (req, res, next){
+    console.log("here-valie");
     const token = req.body.token;
     if (token == null) 
         return next({status:401, message:'Please login again!'});
