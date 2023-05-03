@@ -16,7 +16,7 @@ const ServiceInfo = () => {
       token: token
     };
     
-    axios.post(`${api_url}/getServiceKind`, account)
+    axios.post(`${api_url}/admin/getServiceKind`, account)
     .then(response => {
       if(response.data.status === 0){
         setKind(response.data.kinds);
@@ -40,7 +40,7 @@ const ServiceInfo = () => {
       price:servicePrice
     };
     
-    axios.post(`${api_url}/insertService`, account)
+    axios.post(`${api_url}/admin/insertService`, account)
     .then(response => {
       if(response.data.status === 0){
         cogoToast.success(response.data.message);

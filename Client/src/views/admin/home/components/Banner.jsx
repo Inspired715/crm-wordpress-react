@@ -28,7 +28,7 @@ const Banner1 = () => {
       token: token
     };
     
-    axios.post(`${api_url}/getBannerData`, account)
+    axios.post(`${api_url}/admin/getBannerData`, account)
     .then(response => {
       if(response.data.status === 0){
         setData(response.data.banner[0]);

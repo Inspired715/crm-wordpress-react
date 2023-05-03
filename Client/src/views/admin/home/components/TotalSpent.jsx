@@ -36,7 +36,7 @@ const TotalSpent = () => {
       token: token
     };
     
-    axios.post(`${api_url}/getChartData`, account)
+    axios.post(`${api_url}/admin/getChartData`, account)
     .then(response => {
       if(response.data.status === 0){
         //setData(response.data.raking);

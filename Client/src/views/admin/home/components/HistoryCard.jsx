@@ -31,7 +31,7 @@ const HistoryCard = () => {
       token: token
     };
     
-    axios.post(`${api_url}/getLeaderBoard`, account)
+    axios.post(`${api_url}/admin/getLeaderBoard`, account)
     .then(response => {
       if(response.data.status === 0){
         setData(response.data.raking);

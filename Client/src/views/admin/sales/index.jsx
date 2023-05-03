@@ -13,7 +13,7 @@ const Sales = () => {
       token: token
     };
     
-    axios.post(`${api_url}/getSalesList`, account)
+    axios.post(`${api_url}/admin/getSalesList`, account)
     .then(response => {
       if(response.data.status === 0){
         setSales(response.data.sales);

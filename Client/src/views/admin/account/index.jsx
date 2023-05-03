@@ -38,7 +38,7 @@ const Account = () => {
       avatar: newAvatar
     };
     
-    axios.post(`${api_url}/updateAccount`, account)
+    axios.post(`${api_url}/admin/updateAccount`, account)
     .then(response => {
       if(response.data.status === 0){
         cogoToast.success(response.data.message);

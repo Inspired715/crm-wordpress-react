@@ -15,7 +15,7 @@ export default function Users() {
       token: token
     };
     
-    axios.post(`${api_url}/getUserList`, account)
+    axios.post(`${api_url}/admin/getUserList`, account)
     .then(response => {
       if(response.data.status === 0){
         setData(response.data.users);

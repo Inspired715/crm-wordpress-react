@@ -15,7 +15,7 @@ useEffect(() => {
     token: token
   };
   
-  axios.post(`${api_url}/getServiceList`, account)
+  axios.post(`${api_url}/admin/getServiceList`, account)
   .then(response => {
     if(response.data.status === 0){
       setData(response.data.service);
