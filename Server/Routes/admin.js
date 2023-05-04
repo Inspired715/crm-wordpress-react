@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const connection = require('../database');
 const express = require('express');
 let app = express.Router();
+const transporter = require('../mail');
 
 const validateToken = function (req, res, next){
     const token = req.body.token;
@@ -244,6 +245,34 @@ app.post("/buyService", validateToken, (req, res) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else
         res.send(JSON.stringify({status:0, message: "Succecssfully You bought!"}));
+    });
+})
+
+app.post("/sendMeetingMail", validateToken, (req, res) => {
+    let phone = req.body.phone;
+    let description = req.body.description;
+    let toAddress = req.body.receiver;
+    let meeting = req.body.meeting;
+
+    var mailOptions = {
+        from: 'gatewayagencydev@gmail.com',
+        to: toAddress,
+        subject: 'Meeting',
+        text: `${description}
+
+        Please contact here.
+        Phone number : ${phone}
+        Meeting url : ${meeting}
+        
+        Thank you.`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            res.send(JSON.stringify({status:1, message:`${error}`}));
+        } else {
+            res.send(JSON.stringify({status:0, message:"Sent successfully."}));
+        }
     });
 })
 

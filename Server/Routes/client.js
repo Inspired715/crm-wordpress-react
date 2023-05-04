@@ -2,15 +2,7 @@ const jwt = require("jsonwebtoken");
 const express = require('express');
 let app = express.Router();
 const connection = require('../database');
-const nodemailer = require('nodemailer');
-
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'gatewayagencydev@gmail.com',
-        pass: 'jpcakespsoujbzpr'
-    }
-});
+const transporter = require('../mail');
 
 app.post("/login", (req, res) => {
     let email = req.body.email;
