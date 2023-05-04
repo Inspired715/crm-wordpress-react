@@ -41,7 +41,7 @@ const TotalSpent = () => {
       </h4>
       <div className="bg-black rounded-[20px]">
         <div className="text-left m-[20px]">
-          <label className="bg-transparent text-white px-[25px] py-[5px] mx-[30px] rounded-[5px] font-hel" style={{border:'1px solid white',cursor:'grabbing'}}
+          <label className="bg-transparent text-white px-[25px] py-[5px] mx-[5px] rounded-[5px] font-hel" style={{border:'1px solid white',cursor:'grabbing'}}
             onClick={() => handleGetChartData(0)}
           >Week</label>
           <label className="bg-transparent text-white px-[25px] py-[5px] rounded-[5px] font-hel" style={{border:'1px solid white',cursor:'grabbing'}}

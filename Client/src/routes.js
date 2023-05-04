@@ -18,14 +18,15 @@ import SalsInfo from "views/client/saleinfo";
 import Welcome from "views/client/welcome";
 // Icon Imports
 import {
-  MdHome,
-  MdOutlineShoppingCart,
-  MdBarChart,
-  MdPerson,
-  MdLock,
-  MdDesignServices,
-  MdCleaningServices,
-  MdOutlineVerifiedUser
+  MdOutlineHome,
+  MdOutlineDesignServices,
+  MdManageHistory,
+  MdSupervisorAccount,
+  MdOutlineRoomService,
+  MdOutlineAccountCircle,
+  MdOutlineMonetizationOn,
+  MdOutlineHelpOutline
+
 } from "react-icons/md";
 
 const routes = [
@@ -34,7 +35,7 @@ const routes = [
     brad: "welcome",
     layout: "/admin",
     path: "home",
-    icon: <MdHome className="h-6 w-6" />,
+    icon: <MdOutlineHome className="h-6 w-6" />,
     component: <MainDashboard />,
   },
   {
@@ -42,7 +43,7 @@ const routes = [
     brad: "Services",
     layout: "/admin",
     path: "services",
-    icon: <MdDesignServices className="h-6 w-6" />, 
+    icon: <MdOutlineDesignServices className="h-6 w-6" />, 
     component: <Services />,
   },
   {
@@ -50,7 +51,7 @@ const routes = [
     brad: "Sales",
     layout: "/admin",
     path: "sales",
-    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
+    icon: <MdManageHistory className="h-6 w-6" />,
     component: <Sales />,
     secondary: true,
   },
@@ -59,7 +60,7 @@ const routes = [
     brad: "Users",
     layout: "/admin",
     path: "users",
-    icon: <MdOutlineVerifiedUser className="h-6 w-6" />, 
+    icon: <MdSupervisorAccount className="h-6 w-6" />, 
     component: <Users />,
   },
   {
@@ -67,7 +68,7 @@ const routes = [
     brad: "Services Information",
     layout: "/admin",
     path: "serviceinfo",
-    icon: <MdCleaningServices className="h-6 w-6" />, 
+    icon: <MdOutlineRoomService className="h-6 w-6" />, 
     component: <ServiceInfo />,
   },
   {
@@ -75,7 +76,7 @@ const routes = [
     brad: "your account information",
     layout: "/admin",
     path: "account",
-    icon: <MdPerson className="h-6 w-6" />,
+    icon: <MdOutlineAccountCircle className="h-6 w-6" />,
     component: <Account />,
   },
   {
@@ -83,14 +84,14 @@ const routes = [
     brad: "Balance",
     layout: "/admin",
     path: "balance",
-    icon: <MdLock className="h-6 w-6" />, 
+    icon: <MdOutlineMonetizationOn className="h-6 w-6" />, 
     component: <Balance />,
   },
   {
     name: "Resources",
     brad: "Resources",
     layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
+    icon: <MdOutlineHelpOutline className="h-6 w-6" />,
     path: "resources",
     component: <Resource />,
   },

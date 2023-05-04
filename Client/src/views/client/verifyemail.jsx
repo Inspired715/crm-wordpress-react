@@ -84,35 +84,35 @@ export default function Verifyemail() {
               id="vnum1"
               onChange={(e) => {setVnum1(e.target.value); if(e.target.value !=='')document.getElementById('vnum2').focus()}}
               maxLength={1}
-              className="text-center rounded-[15px] border bg-white/0 p-3 text-[18px] w-[50px] h-[60px]"/>
+              className="text-center rounded-[15px] border bg-white/0 p-3 text-[17px] w-[50px] h-[60px]"/>
             <input
               type="text"
               placeholder=""
               id="vnum2"
               onChange={(e) => {setVnum2(e.target.value);if(e.target.value !=='')document.getElementById('vnum3').focus()}}
               maxLength={1}
-              className="text-center rounded-[15px] border bg-white/0 p-3 text-[18px] w-[50px] h-[60px]"/>
+              className="text-center rounded-[15px] border bg-white/0 p-3 text-[17px] w-[50px] h-[60px]"/>
             <input
               type="text"
               placeholder=""
               id="vnum3"
               onChange={(e) => {setVnum3(e.target.value);if(e.target.value !=='')document.getElementById('vnum4').focus()}}
               maxLength={1}
-              className="text-center rounded-[15px] border bg-white/0 p-3 text-[18px] w-[50px] h-[60px]"/>
+              className="text-center rounded-[15px] border bg-white/0 p-3 text-[17px] w-[50px] h-[60px]"/>
             <input
               type="text"
               placeholder=""
               id="vnum4"
               onChange={(e) => {setVnum4(e.target.value);if(e.target.value !=='')document.getElementById('vnum5').focus()}}
               maxLength={1}
-              className="text-center rounded-[15px] border bg-white/0 p-3 text-[18px] w-[50px] h-[60px]"/>
+              className="text-center rounded-[15px] border bg-white/0 p-3 text-[17px] w-[50px] h-[60px]"/>
             <input
               type="text"
               placeholder=""
               id="vnum5"
               onChange={(e) => setVnum5(e.target.value)}
               maxLength={1}
-              className="text-center rounded-[15px] border bg-white/0 p-3 text-[18px] w-[50px] h-[60px]"/>
+              className="text-center rounded-[15px] border bg-white/0 p-3 text-[17px] w-[50px] h-[60px]"/>
           </div>
           <label className="text-[18px] flex items-center h-[80px] font-hel">
             You should receive an email from us with a verification code

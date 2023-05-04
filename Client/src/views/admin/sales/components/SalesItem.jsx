@@ -19,21 +19,24 @@ const SalesItem = ({data}) => {
             </div>
         </div>
     </div>
-    <div className="pt-5">
-      <table className="w-full mx-[10px]">
+    <div className="pt-5 overflow-auto">
+      <table className="w-full">
           <thead>
             <tr>
-              <th className="pb-[10px] text-start">
+              <th className="pb-[10px] text-center">
                 DATE
               </th>
-              <th className="pb-[10px] text-start">
+              <th className="pb-[10px] text-center">
                 services
               </th>
               <th className="pb-[10px] text-center">
                 commission
               </th>
               <th className="pb-[10px] text-center">
-                amount earned
+                Status
+              </th>
+              <th className="pb-[10px] text-center">
+                Cash out
               </th>
             </tr>
           </thead>
@@ -48,11 +51,14 @@ const SalesItem = ({data}) => {
                     <td className="text-[12px] border-b border-black pt-[14px] pb-[20px]">
                       {item.s_name}-{base64_decode(item.title)}<br/>{item.email}
                     </td>
-                    <td className="text-[12px] text-center border-b border-black pt-[14px] pb-[20px]">
+                    <td className="text-[14px] text-center border-b border-black pt-[14px] pb-[20px]">
                       ${parseFloat(item.price).toFixed(2)}
                     </td>
-                    <td className="text-[12px]">
-                      
+                    <td className="text-[14px] border-b border-black">
+                      {item.paid===1?"Paid":"Ordered"}
+                    </td>
+                    <td className={item.cashed===1?"text-[14px] border-b border-black":"text-[14px] text-white border-b border-black"}>
+                      {item.cashed===1?"Yes":"No"}
                     </td>
                   </tr>
                 )

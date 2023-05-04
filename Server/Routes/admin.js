@@ -104,11 +104,11 @@ app.post("/updateAccount", validateToken, (req, res) => {
 
 app.post("/getSalesList",  validateToken, (req, res) => {
     let sql = `select u.id,s.created_at, concat(u.first_name, ' ', u.last_name) as name, 
-                u.email, u.phone, ck.name as s_name, cs.title, cs.price from c_sales s 
-                left join c_user u on s.user_id=u.id 
+                u.email, u.phone, ck.name as s_name, cs.title, cs.price, s.paid, s.cashed from c_sales s  
                 left join c_services cs on s.service_id=cs.id 
+                left join c_user u on cs.user_id=u.id
                 left join c_service_kind ck on cs.kind=ck.id
-                where s.paid=1 order by s.created_at`;
+                order by s.created_at`;
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
         else{
@@ -201,4 +201,35 @@ app.post("/getChartData",  validateToken, (req, res) => {
     });
 })
 
+app.post("/getBalance",  validateToken, (req, res) => {
+    let user_id = req.body.user_id;
+    let sql = `select sum(a.total) as total, sum(a.cash) as cash, sum(a.redeemable) as redeemable from (
+        select sum(cs.price) as total, 0 as cash, 0 as redeemable from c_sales s left join c_services cs on s.service_id=cs.id left join c_user u on cs.user_id=u.id where s.paid=1 and u.id=${user_id}
+        union
+        select 0 as total, sum(cs.price) as cash, 0 as redeemable from c_sales s left join c_services cs on s.service_id=cs.id left join c_user u on cs.user_id=u.id where s.paid=1 and s.cashed=1 and u.id=${user_id}
+        union
+        select 0 as total, 0 as cash, sum(cs.price) as redeemable from c_sales s left join c_services cs on s.service_id=cs.id left join c_user u on cs.user_id=u.id where s.paid=1 and s.cashed=0 and u.id=${user_id})a`;
+
+    connection.query(sql, (err, rows) => {
+        if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
+        else
+        res.send(JSON.stringify({status:0, balance: rows[0]}));
+    });
+})
+
+app.post("/submitCashout", validateToken, (req, res) => {
+    let user_id = req.body.user_id;
+    let sql = `update c_sales set cashed=1
+                where id in (
+                select s.id from c_sales s 
+                left join c_services cs on s.service_id=cs.id 
+                left join c_user u on cs.user_id=u.id 
+                where s.paid=1 and s.cashed=0 and u.id=${user_id}
+                )`;
+    connection.query(sql, (err, rows) => {
+        if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
+        else
+        res.send(JSON.stringify({status:0, message: "Succecssfully Cash outed!"}));
+    });
+})
 module.exports = app

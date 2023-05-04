@@ -49,7 +49,7 @@ const HistoryCard = () => {
       <div className="flex flex-col justify-between bg-black rounded-[10px] p-3">
         <div className="flex justify-between">
           <p className="text-[18px] text-white">{ordinal_suffix_of(data[0]?.ranking)}</p>
-          <p className="text-[21px] text-white font-bold">{data[0]?.name}</p>
+          <p className="text-[15px] text-white font-bold text-center" style={{lineHeight:'27px'}}>{data[0]?.name}</p>
           <p className="text-[18px] text-white font-hel">${parseFloat(data[0]?.price).toFixed(2)}</p>
         </div>
         <div className="flex justify-center py-[20px]">
@@ -69,7 +69,7 @@ const HistoryCard = () => {
                 src={item.avatar?item.avatar:avatar}
                 alt=""
               />
-              <div className="text-white text-[13px] w-[395px] 2xl:w-[250px] px-[5px]">
+              <div className="text-white text-[15px] w-[395px] 2xl:w-[250px] px-[20px] font-hel">
                 {item.name}
               </div>
               <div className="text-white text-[15px] font-hel w-[100px] text-end">

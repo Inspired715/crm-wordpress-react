@@ -23,7 +23,7 @@ const Navbar = (props) => {
         </p>
       </div>
       <div>
-        <p onClick={() => {handleLogout()}} className="font-bold">SIGN OUT</p>
+        <p onClick={() => {handleLogout()}} className="font-bold" style={{cursor:"grabbing"}}>SIGN OUT</p>
       </div>
     </nav>
   );

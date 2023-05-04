@@ -32,7 +32,7 @@ const Table = (props) => {
   );
   
   return (
-    <div className="table-container">
+    <div className="table-container overflow-auto">
       <table className={style.tableWrapper} {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (

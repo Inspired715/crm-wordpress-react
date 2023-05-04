@@ -78,7 +78,7 @@ const Account = () => {
 
   return (
     <div className='w-full h-full flex justify-center flex-col'>
-      <div className="w-60p p-5 rounded-[20px] mx-auto bg-yellow" style={{ maxWidth: '640px' }}>
+      <div className="sm:w-60p p-5 rounded-[20px] sm:mx-auto bg-yellow" style={{ maxWidth: '640px' }}>
         <div className="rounded-[20px] bg-black w-full">
           <div className="p-[30px]">
             <div className="mb-[30px]">
