@@ -30,3 +30,7 @@
 		font-family: 'FontSpring Regular Bold' !important;
 	}
 }
+
+.apexcharts-canvas > svg {
+    background-color: transparent !important;
+}
