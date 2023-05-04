@@ -6,7 +6,7 @@ import api_url from "constant";
 
 const Balance = () => {
     const {token, email} = JSON.parse(localStorage.getItem('gatewayagency'));
-    const [status, setStatus] = useState(1);
+    const [status, setStatus] = useState(0);
     const [data, setData] = useState([]);
 
     const submitCashout = () => {

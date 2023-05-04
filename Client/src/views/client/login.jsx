@@ -16,9 +16,7 @@ export default function Login() {
     
     axios.post(`${api_url}/login`, account)
     .then(response => {
-      console.log('response', response);
       if(response.data.status === 0){
-        cogoToast.success(response.data.message);
         let session = {
           email: response.data.email,
           avatar: response.data.avatar,

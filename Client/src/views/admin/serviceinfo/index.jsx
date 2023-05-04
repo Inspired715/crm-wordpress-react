@@ -36,8 +36,8 @@ const ServiceInfo = () => {
       token: token,
       user_id:user_id,
       kind: kindId,
-      title: base64_encode(serviceTitle),
-      description: base64_encode(serviceDescription),
+      title: base64_encode(encodeURIComponent(serviceTitle)),
+      description: base64_encode(encodeURIComponent(serviceDescription)),
       price:servicePrice
     };
     

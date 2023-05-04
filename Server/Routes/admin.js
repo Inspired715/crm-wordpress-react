@@ -232,4 +232,19 @@ app.post("/submitCashout", validateToken, (req, res) => {
         res.send(JSON.stringify({status:0, message: "Succecssfully Cash outed!"}));
     });
 })
+
+app.post("/buyService", validateToken, (req, res) => {
+    let user_id = req.body.user_id;
+    let sid = req.body.sid;
+    let created_at = new Date();
+    created_at = created_at.toISOString().slice(0, 10);
+
+    let sql = `insert into c_sales (service_id, user_id, paid, created_at, cashed) values(${sid}, ${user_id}, 1, '${created_at}', 0)`;
+    connection.query(sql, (err, rows) => {
+        if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
+        else
+        res.send(JSON.stringify({status:0, message: "Succecssfully You bought!"}));
+    });
+})
+
 module.exports = app

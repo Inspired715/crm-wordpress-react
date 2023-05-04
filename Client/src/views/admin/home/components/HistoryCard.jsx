@@ -48,9 +48,9 @@ const HistoryCard = () => {
       </h4>
       <div className="flex flex-col justify-between bg-black rounded-[10px] p-3">
         <div className="flex justify-between">
-          <p className="text-[18px] text-white">{ordinal_suffix_of(data[0]?.ranking)}</p>
+          <p className="text-[18px] text-white">{ordinal_suffix_of(data[0]?.ranking?data[0]?.ranking:0)}</p>
           <p className="text-[15px] text-white font-bold text-center" style={{lineHeight:'27px'}}>{data[0]?.name}</p>
-          <p className="text-[18px] text-white font-hel">${parseFloat(data[0]?.price).toFixed(2)}</p>
+          <p className="text-[18px] text-white font-hel">${parseFloat(data[0]?.price?data[0]?.price:0).toFixed(2)}</p>
         </div>
         <div className="flex justify-center py-[20px]">
           <img src={data[0] && data[0].avatar?data[0].avatar:avatar} className="w-[90px] h-[90px] rounded-[100%]" alt="gatewayagency ranking first avatar"/>

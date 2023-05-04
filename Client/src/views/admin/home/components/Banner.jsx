@@ -58,7 +58,7 @@ const Banner1 = () => {
           <div className="flex flex-col items-start justify-center bg-black rounded-[10px] py-[20px] px-[30px]">
             <p className="text-[18px] text-white">You are currently in</p>
             <p className="text-white text-[28px]">
-              {ordinal_suffix_of(data?.num)} place
+              {ordinal_suffix_of(data?.num?data?.num:0)} place
             </p>
             <p className="text-[18px] text-white">
               amongst your peers for<br/>

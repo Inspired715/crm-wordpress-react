@@ -11,6 +11,27 @@ export default function Services() {
 const {token, email, phone, name} = JSON.parse(localStorage.getItem('gatewayagency'));
 const [data, setData] = useState([]);
 
+const handleBuy = (id) => {
+  const account = { 
+    token: token,
+    sid:id
+  };
+  
+  axios.post(`${api_url}/admin/buyService`, account)
+  .then(response => {
+    if(response.data.status === 0){
+      cogoToast.success(response.data.message);
+    }
+    else{
+      cogoToast.error(response.data.message);
+    }        
+  });
+}
+
+const handleBook = (recp, sender) => {
+  console.log(sender, recp)
+}
+
 useEffect(() => {
   const account = { 
     token: token
@@ -44,7 +65,7 @@ const columns = [
           accessor: "service",
           Cell:(row) => {
             return (
-              <div>{row.row.original.service}-{base64_decode(row.row.original.title)}<br/>{row.row.original.email}</div>
+              <div>{row.row.original.service}-{decodeURIComponent(base64_decode(row.row.original.title))}<br/>{row.row.original.email}</div>
             )
           }
         },
@@ -59,11 +80,11 @@ const columns = [
         },
         {
           Header: "Action",
-          Cell: () => {
+          Cell: (row) => {
             return (
               <div className="flex justify-between">
-                <img src={book} className="w-[45px] h-[45px] cursor-pointer" alt="gateway book"/>
-                <img src={buy} className="w-[45px] h-[45px] cursor-pointer" alt="gateway buy"/>
+                <img src={book} className="w-[45px] h-[45px] cursor-pointer" alt="gateway book" onClick={() => {handleBook(row.row.original.email, email)}}/>
+                <img src={buy} className="w-[45px] h-[45px] cursor-pointer" alt="gateway buy" onClick={() => {handleBuy(row.row.original.id)}}/>
               </div>
             )
           }

@@ -49,7 +49,7 @@ const SalesItem = ({data}) => {
                       {item.created_at.slice(0, 10)}
                     </td>
                     <td className="text-[12px] border-b border-black pt-[14px] pb-[20px]">
-                      {item.s_name}-{base64_decode(item.title)}<br/>{item.email}
+                      {item.s_name}-{decodeURIComponent(base64_decode(item.title))}<br/>{item.email}
                     </td>
                     <td className="text-[14px] text-center border-b border-black pt-[14px] pb-[20px]">
                       ${parseFloat(item.price).toFixed(2)}
