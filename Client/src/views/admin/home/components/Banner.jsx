@@ -6,6 +6,7 @@ import api_url from "constant";
 const Banner1 = () => {
   const {token, email} = JSON.parse(localStorage.getItem('gatewayagency'));
   const [data, setData] = useState(null);
+  const [cash, setCash] = useState(null);
 
   const ordinal_suffix_of = (place) => {
     var decimal = place % 10,
@@ -32,6 +33,7 @@ const Banner1 = () => {
     .then(response => {
       if(response.data.status === 0){
         setData(response.data.banner[0]);
+        setCash(response.data.forCashed);
       }
       else{
         cogoToast.error(response.data.message);
@@ -60,9 +62,9 @@ const Banner1 = () => {
 
           <div className="flex flex-col justify-between">
             <div className="bg-black rounded-[10px] py-[20px] px-[30px]">
-              <p className="text-[18px] text-white">Redeemable Amount: <span className="text-[28px]">&nbsp;&nbsp;${Number.parseFloat(data?.price).toFixed(2)}</span></p>
+              <p className="text-[18px] text-white">Redeemable Amount: <span className="text-[28px]">&nbsp;&nbsp;${Number.parseFloat(cash?.price).toFixed(2)}</span></p>
               <p className="text-[12px] text-grey">
-                Earned from {data?.min_date.slice(0, 10)} to {data?.max_date.slice(0, 10)}
+                Earned from {cash?.min_date.slice(0, 10)} to {cash?.max_date.slice(0, 10)}
               </p>
             </div>
             <div className="flex justify-between mt-3">

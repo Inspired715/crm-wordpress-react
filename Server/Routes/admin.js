@@ -137,11 +137,21 @@ app.post("/getBannerData",  validateToken, (req, res) => {
                 left join c_services cs on s.service_id=cs.id 
                 where s.paid=1 GROUP BY cs.user_id ORDER BY price desc) a) a 
                 where a.user_id=${user_id}`;
-
+    let banner = [];
     connection.query(sql, (err, rows) => {
         if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
-        else
-        res.send(JSON.stringify({status:0, banner: rows[1]}));
+        else{
+            banner = rows[1];
+            sql = `select ifnull(sum(cs.price), 0) as price, ifnull(min(a.created_at), CURDATE()) as min_date, ifnull(max(a.created_at), CURDATE()) as max_date 
+                    from (select * from c_sales where cashed=0 and paid=1)a 
+                    left join c_services cs on a.service_id=cs.id 
+                    where cs.user_id=${user_id}`;
+
+            connection.query(sql, (err, rows) => {
+                if (err) res.send(JSON.stringify({status:1, message:`${err}`}));
+                res.send(JSON.stringify({status:0, banner: banner, forCashed: rows[0]}));
+            })
+        }
     });
 })
 
