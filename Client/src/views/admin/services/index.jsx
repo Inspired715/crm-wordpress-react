@@ -6,10 +6,13 @@ import axios from "axios";
 import api_url from "constant";
 import { useEffect, useState } from "react";
 import {decode as base64_decode} from 'base-64';
+import MailModal from "components/modal/modal";
 
 export default function Services() {
 const {token, email, phone, name} = JSON.parse(localStorage.getItem('gatewayagency'));
 const [data, setData] = useState([]);
+const [receiver, setReceiver] = useState('');
+const [modal, setModal] = useState(false);
 
 const handleBuy = (id) => {
   const account = { 
@@ -28,8 +31,32 @@ const handleBuy = (id) => {
   });
 }
 
-const handleBook = (recp, sender) => {
-  console.log(sender, recp)
+const handleBook = (recp) => {
+  setModal(true);
+  setReceiver(recp);
+}
+
+const sendMail = (phone, meeting, description) => {
+  if(phone === '' || meeting === '' || description === '')
+    return;
+  const account = { 
+    token: token,
+    phone:phone,
+    meeting:meeting,
+    description: description,
+    receiver:receiver
+  };
+  
+  axios.post(`${api_url}/admin/sendMeetingMail`, account)
+  .then(response => {
+    if(response.data.status === 0){
+      cogoToast.success(response.data.message);
+      setModal(false);
+    }
+    else{
+      cogoToast.error(response.data.message);
+    }        
+  });
 }
 
 useEffect(() => {
@@ -83,7 +110,7 @@ const columns = [
           Cell: (row) => {
             return (
               <div className="flex justify-between">
-                <img src={book} className="w-[45px] h-[45px] cursor-pointer" alt="gateway book" onClick={() => {handleBook(row.row.original.email, email)}}/>
+                <img src={book} className="w-[45px] h-[45px] cursor-pointer" alt="gateway book" onClick={() => {handleBook(row.row.original.email)}}/>
                 <img src={buy} className="w-[45px] h-[45px] cursor-pointer" alt="gateway buy" onClick={() => {handleBuy(row.row.original.id)}}/>
               </div>
             )
@@ -118,7 +145,12 @@ const columns = [
           </div>
         </div>
       </div>
+      <MailModal
+        isOpen={modal}
+        setIsOpen={setModal}
+        sendMail={sendMail}
+      />
     </div>
-
+  
   );
 }
