@@ -27,6 +27,7 @@ export default function Admin(props) {
           routes[i].layout + "/" + routes[i].path
         ) !== -1
       ) {
+        console.log(routes[i].brad);
         setCurrentRoute(routes[i].brad);
       }
     }
