@@ -24,10 +24,10 @@ export default function Admin(props) {
     for (let i = 0; i < routes.length; i++) {
       if (
         window.location.href.indexOf(
-          routes[i].layout + "/" + routes[i].path
+          `${window.location.origin}${routes[i].layout}/${routes[i].path}`
         ) !== -1
       ) {
-        console.log(routes[i].brad);
+        console.log(routes[i].layout + "/" + routes[i].path, routes[i].layout + "/" + routes[i].path, window.location.href)
         setCurrentRoute(routes[i].brad);
       }
     }
