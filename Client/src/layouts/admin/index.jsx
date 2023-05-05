@@ -27,7 +27,6 @@ export default function Admin(props) {
           `${window.location.origin}${routes[i].layout}/${routes[i].path}`
         ) !== -1
       ) {
-        console.log(routes[i].layout + "/" + routes[i].path, routes[i].layout + "/" + routes[i].path, window.location.href)
         setCurrentRoute(routes[i].brad);
       }
     }
